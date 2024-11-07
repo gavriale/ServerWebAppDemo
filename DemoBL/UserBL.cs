@@ -32,6 +32,7 @@ namespace WebApplicationDemo.DemoBL
                 throw new UserNotFoundException(userId);
             }
 
+            _logger.LogInformation($"User with ID {userId} retrieved successfully");
             return retrievedUser;
         }
 

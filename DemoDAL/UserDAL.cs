@@ -34,21 +34,10 @@ namespace WebApplicationDemo.DemoDAL
 
         public async Task<User> GetUserById(int id)
         {
-            if (id < 0)
-            {
-                throw new ArgumentException("Illegal Id input, Id should be greater than 0");
-            }
-
+          
             User? retrievedUser = await _contextDB.Users
                                             .Include(u => u.Certificates)
                                             .FirstOrDefaultAsync(u => u.Id == id);
-            if (retrievedUser == null)
-            {
-                _logger.LogWarning($"User with ID {id} not found");
-                throw new UserNotFoundException(id);
-            }
-
-            _logger.LogInformation($"User with ID {id} retrieved successfully");
             return retrievedUser;
         }
     }
