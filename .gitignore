@@ -1,0 +1,31 @@
+﻿# Ignore build output directories
+bin/
+obj/
+
+# User-specific files
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Auto-generated files
+*.log
+.vscode/
+*.tmp
+*.ide
+
+# Configuration files
+appsettings.Development.json
+
+# Build artifacts
+*.exe
+*.dll
+*.pdb
+*.cache
+
+# Rider project files
+.idea/
+
+# Visual Studio Code settings folder
+.vscode/
