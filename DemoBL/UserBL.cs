@@ -19,6 +19,12 @@ namespace WebApplicationDemo.DemoBL
 
         public async Task<User> GetUserById(int userId)
         {
+
+            if (userId <= 0)
+            {
+                throw new ArgumentException("User ID must be greater than 0", nameof(userId));
+            }
+
             User retrievedUser = await _userDAL.GetUserById(userId);
 
             if (retrievedUser == null)
@@ -28,5 +34,25 @@ namespace WebApplicationDemo.DemoBL
 
             return retrievedUser;
         }
+
+        public async Task<User> GetUserByEmail(string email)
+        {
+
+            if (string.IsNullOrEmpty(email))
+            {
+                throw new ArgumentNullException(nameof(email));
+            }
+
+            User retrievedUser = await _userDAL.GetUserByEmail(email);
+
+            if (retrievedUser == null)
+            {
+                throw new UserNotFoundException(email);
+            }
+
+            return retrievedUser;
+        }
+
+
     }
 }

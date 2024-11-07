@@ -18,6 +18,20 @@ namespace WebApplicationDemo.DemoDAL
             _contextDB = contextDB;
         }
 
+        public async Task<User> AddUser()
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<User> GetUserByEmail(string email)
+        {
+            User? retrievedUser = await _contextDB.Users
+                .Where(u => u.Email.Equals(email))
+                .FirstOrDefaultAsync();
+
+            return retrievedUser;
+        }
+
         public async Task<User> GetUserById(int id)
         {
             if (id < 0)

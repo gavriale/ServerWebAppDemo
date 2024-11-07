@@ -23,29 +23,47 @@ namespace WebApplicationDemo.Controllers
         [HttpGet("{userId}")]
         public async Task<IActionResult> GetUserById(int userId)
         {
-            _logger.LogInformation($"In Controller GetUserById: {userId}");
+            return await HandleUserRequest(
+                        () => _userBL.GetUserById(userId),
+                        userId.ToString(),
+                        "ID"
+                    );
+            }
+
+        [HttpGet("email/{email}")]
+        public async Task<IActionResult> GetUserByEmail(string email)
+        {
+            return await HandleUserRequest(
+                        () => _userBL.GetUserByEmail(email),
+                        email,
+                        "email"
+                    );
+        }
+
+        private async Task<IActionResult> HandleUserRequest(Func<Task<User>> getUserFunc, string identifier, string identifierType)
+        {
+            _logger.LogInformation($"Attempting to retrieve user with {identifierType}: {identifier}");
+
             try
             {
-                _logger.LogInformation($"Attempting to retrieve user with ID: {userId}");
-                 User retrievedUser = await _userBL.GetUserById(userId);
-                 return Ok(retrievedUser);
+                User retrievedUser = await getUserFunc();
+                return Ok(retrievedUser);
             }
             catch (UserNotFoundException ex)
             {
-                _logger.LogWarning($"User with ID {userId} not found. Error: {ex.Message}");
+                _logger.LogWarning($"User with {identifierType} {identifier} not found. Error: {ex.Message}");
                 return NotFound(ex.Message);
             }
             catch (ArgumentException ex)
             {
-                _logger.LogError($"Invalid argument for user ID {userId}. Error: {ex.Message}");
+                _logger.LogError($"Invalid argument for user {identifierType} {identifier}. Error: {ex.Message}");
                 return BadRequest(ex.Message);
             }
             catch (Exception ex)
             {
-                _logger.LogError($"An unexpected error occurred while retrieving user with ID {userId}. Error: {ex.Message}");
+                _logger.LogError($"An unexpected error occurred while retrieving user with {identifierType} {identifier}. Error: {ex.Message}");
                 return StatusCode(500, "An unexpected error occurred.");
             }
         }
-
     }
 }
