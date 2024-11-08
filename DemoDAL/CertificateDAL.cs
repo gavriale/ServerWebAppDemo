@@ -50,7 +50,7 @@ namespace WebApplicationDemo.DemoDAL
             return certificateToAdd;
         }
 
-        public Task<Certificate> GetCertificateByUserId(Certificate certificate)
+        public Task<List<Certificate>> GetCertificatesByUserId(Certificate certificate)
         {
             throw new NotImplementedException();
         }

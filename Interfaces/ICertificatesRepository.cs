@@ -8,7 +8,7 @@ namespace WebApplicationDemo.Interfaces
         Task<List<Certificate>> GetCertificates();
         Task<Certificate> GetCertificateById(string certificateId);
         Task<Certificate> AddCertificate(Certificate certificate);
-        Task<Certificate> GetCertificateByUserId(Certificate certificate);
+        Task<List<Certificate>> GetCertificatesByUserId(Certificate certificate);
 
 
     }

@@ -17,7 +17,6 @@ namespace WebApplicationDemo.Controllers
         public CertificateController(ApplicationDbContext context, ILogger<UserController> logger,CertificateBL certificateBL)
         {
             _logger = logger;
-            _context = context;
             _certificateBL = certificateBL;
         }
 
@@ -73,15 +72,3 @@ namespace WebApplicationDemo.Controllers
     }
 }
 
-/**
- * {
-  "certificateId": "c003",
-  "description": "SSL Certificate for Website Security",
-  "startDate": "2024-11-01T00:00:00",
-  "dueDate": "2025-11-01T00:00:00",
-  "userId": 1
-}git remote add origin https://github.com/gavriale/ServerWebAppDemo.git
-git config --global user.name "gavriale"
-git config --global user.email "gavriale.al@gmail.com"
-
- */
