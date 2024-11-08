@@ -16,6 +16,7 @@ namespace WebApplicationDemo.Controllers
 
         public CertificateController(ApplicationDbContext context, ILogger<UserController> logger,CertificateBL certificateBL)
         {
+            _context = context;
             _logger = logger;
             _certificateBL = certificateBL;
         }
